@@ -1,0 +1,1 @@
+# flask_rbac_mad1_style
