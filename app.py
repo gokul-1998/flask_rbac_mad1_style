@@ -226,7 +226,6 @@ def get_authenticated_data():
 
 @app.route('/multiple-roles')
 @roles_accepted('admin', 'manager')
-
 def multiple_roles():
     return {"username": current_user.username,
              "id": current_user.id,
@@ -249,42 +248,9 @@ def user_role_date():
 
 
 
-@app.route('/gen_csv')
-def gen_csv():
-    from tasks import bla
-    task=bla.delay()
-    return jsonify({"task-id": task.id})
-
-@app.route('/task')
-def taskgy():
-
-    task=monthly_report.delay()
-    return jsonify({"task-id": task.id})
-
-@app.get('/get_csv/<task_id>')
-def get_csv(task_id):
-    res = AsyncResult(task_id)
-    print(res)
-    if res.ready():
-        filename = res.result
-        return send_file(filename, as_attachment=True)
-    else:
-        return jsonify({"message": "Task Pending"}), 404
- 
 
 
-@app.post('/add-to-desktop')
-def add_to_desktop():
-    data=request.get_json()
-    app_name = data['name']
-    icon_path = data['icon']
-    app_route = data['url']
 
-    shortcut_path= f'/Users/shriprasad/Desktop/{app_name}'
-    # Creating the desktop shortcut
-    make_shortcut(app_name,shortcut_path,icon=icon_path, terminal=False)
-
-    return {"Message":"Shortcut Created Successfully!"}
 
 if __name__ == "__main__":
     app.run(debug=True,port=5003)
