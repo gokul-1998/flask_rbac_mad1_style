@@ -12,3 +12,8 @@ class Config:
     SECURITY_PASSWORD_SALT="daykdhudtashkyfuh"
     SECURITY_TOKEN_AUTHENTICATION_KEY='auth_token'
     SECURITY_TOKEN_AUTHENTICATION_HEADER = 'Authentication-Token'
+    CACHE_TYPE = 'RedisCache'
+    CACHE_DEFAULT_TIMEOUT = 300
+    CACHE_REDIS_HOST = os.environ.get('CACHE_REDIS_HOST')
+    CACHE_REDIS_PASSWORD = os.environ.get('CACHE_REDIS_PASSWORD')
+    CACHE_REDIS_PORT = os.environ.get('CACHE_REDIS_PORT')
