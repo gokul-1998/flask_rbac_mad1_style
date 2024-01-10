@@ -4,21 +4,16 @@ import hashlib
 from flask import Flask, redirect, render_template,request, make_response, jsonify, send_file, url_for
 from flask_security import SQLAlchemySessionUserDatastore, Security, login_user, logout_user
 from flask_security import current_user, auth_required, login_required, roles_required, roles_accepted,hash_password,verify_password
-from flask_cors import CORS
-# from pyshortcuts import make_shortcut
 from models import *
 from apis import *
 from config import Config
 import time
 
 from admin_create import admin_create_user
-# from tasks import create_resource_csv
-# from worker import celery_init_app
 
 app = Flask(__name__)
 api.init_app(app)
 app.config.from_object(Config)
-CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///./model1.db"
 
